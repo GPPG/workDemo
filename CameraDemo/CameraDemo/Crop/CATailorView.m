@@ -76,6 +76,12 @@
     [self addSubview:self.rightTopView];
     [self addSubview:self.rightBottomView];
     self.gridLayer.layer.mask = self.tempLayer;
+    
+    UIView *vvv = [[UIView alloc]init];
+    
+    vvv.frame = CGRectMake(30, 50, 50, 50);
+    vvv.backgroundColor = [UIColor redColor];
+    [self.imageView addSubview:vvv];
 
 }
 
@@ -209,29 +215,34 @@
     self.leftBottomView.center = [self convertPoint:CGPointMake(self.clippingRect.origin.x, self.clippingRect.origin.y+self.clippingRect.size.height) fromView:self.imageView];
     self.rightTopView.center = [self convertPoint:CGPointMake(self.clippingRect.origin.x+self.clippingRect.size.width, self.clippingRect.origin.y) fromView:self.imageView];
     self.rightBottomView.center = [self convertPoint:CGPointMake(self.clippingRect.origin.x+self.clippingRect.size.width, self.clippingRect.origin.y+self.clippingRect.size.height) fromView:self.imageView];
-//    self.gridLayer.clippingRect = self.clippingRect;
-//    [self.gridLayer setNeedsDisplay];
+    self.gridLayer.clippingRect = self.clippingRect;
+    [self.gridLayer setNeedsDisplay];
     
     
     
     if (self.isSelectRatio) {
+        
         CABasicAnimation *pathAnimation = [CABasicAnimation animationWithKeyPath:@"path"];
-        UIBezierPath *toPath = [UIBezierPath bezierPathWithRect:self.clippingRect];
-        pathAnimation.toValue = (id)toPath.CGPath;
+        
+        UIBezierPath *rectPath = [UIBezierPath bezierPathWithRect:self.gridLayer.bounds];
+        UIBezierPath *path = [UIBezierPath bezierPathWithRect:self.clippingRect];
+        [rectPath appendPath:path];
+        
+        pathAnimation.toValue = (id)rectPath.CGPath;
         pathAnimation.duration = 0.3;
         pathAnimation.removedOnCompletion = NO;
         pathAnimation.fillMode = kCAFillModeForwards;
         pathAnimation.delegate = self;
         [self.tempLayer addAnimation:pathAnimation forKey:nil];
         self.isSelectRatio = NO;
+        
     }else{
-        self.tempLayer.path = [[UIBezierPath bezierPathWithRect:self.clippingRect] CGPath];
+        
+        UIBezierPath *rectPath = [UIBezierPath bezierPathWithRect:self.gridLayer.bounds];
+        UIBezierPath *path = [UIBezierPath bezierPathWithRect:self.clippingRect];
+        [rectPath appendPath:path];
+        self.tempLayer.path = [rectPath CGPath];
     }
-    
-
-    
-    
-    
     
     self.lastClippingRect = self.clippingRect;
    
@@ -239,21 +250,15 @@
 
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag {
     
-    self.tempLayer.path = [[UIBezierPath bezierPathWithRect:self.clippingRect] CGPath];
-    
+    UIBezierPath *rectPath = [UIBezierPath bezierPathWithRect:self.gridLayer.bounds];
+    UIBezierPath *path = [UIBezierPath bezierPathWithRect:self.clippingRect];
+    [rectPath appendPath:path];
+    self.tempLayer.path = rectPath.CGPath;
     [self.tempLayer removeAllAnimations];
     
 }
 
-- (CAShapeLayer *)tempLayer
-{
-    if (!_tempLayer) {
-        _tempLayer = [CAShapeLayer layer];
-        _tempLayer.fillRule = kCAFillRuleEvenOdd;
 
-    }
-    return _tempLayer;
-}
 
 - (CGRect)getImageFrame{
     
@@ -561,11 +566,20 @@
 - (CATailorGridLayer *)gridLayer {
     if (!_gridLayer) {
         _gridLayer = [[CATailorGridLayer alloc] init];
-        _gridLayer.bgColor   = [[UIColor blackColor] colorWithAlphaComponent:.5];
-        _gridLayer.gridColor = [UIColor RGBColorWithR:149 G:109 B:255 alpha:1.0];
+        _gridLayer.backgroundColor  = [[UIColor blackColor] colorWithAlphaComponent:.5];;
+//        _gridLayer.gridColor = [UIColor RGBColorWithR:149 G:109 B:255 alpha:1.0];
 //        _gridLayer.alpha = 0.f;
     }
     return _gridLayer;
+}
+
+- (CAShapeLayer *)tempLayer
+{
+    if (!_tempLayer) {
+        _tempLayer = [CAShapeLayer layer];
+        _tempLayer.fillRule = kCAFillRuleEvenOdd;
+    }
+    return _tempLayer;
 }
 
 - (CATailorCornerView *)leftTopView {
