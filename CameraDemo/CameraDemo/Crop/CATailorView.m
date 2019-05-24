@@ -13,6 +13,7 @@
 #import "UIColor+SWCustomMethod.h"
 #import "UIView+HXExtension.h"
 #import <Masonry.h>
+#import "CATailorLineView.h"
 
 @interface CATailorView()<CAAnimationDelegate>
 
@@ -32,6 +33,7 @@
 
 @property (nonatomic,assign) CGRect lastClippingRect;
 @property (nonatomic, strong) CAShapeLayer *tempLayer;
+@property (nonatomic, strong) CATailorLineView *lineView;
 
 @property (strong, nonatomic) UIPanGestureRecognizer *imagePanGesture;
 @property (assign, nonatomic) BOOL isSelectRatio;
@@ -76,13 +78,8 @@
     [self addSubview:self.rightTopView];
     [self addSubview:self.rightBottomView];
     self.gridLayer.layer.mask = self.tempLayer;
+    [self.imageView addSubview:self.lineView];
     
-    UIView *vvv = [[UIView alloc]init];
-    
-    vvv.frame = CGRectMake(30, 50, 50, 50);
-    vvv.backgroundColor = [UIColor redColor];
-    [self.imageView addSubview:vvv];
-
 }
 
 #pragma mark - layout
@@ -109,10 +106,12 @@
         self.gridLayer.frame = CGRectMake(0, 0, imageFrame.size.width, imageFrame.size.height);
         [UIView animateWithDuration:0.25 animations:^{
             self.imageView.frame = imageFrame;
+            self.lineView.frame = imageFrame;
         } completion:^(BOOL finished) {
             [self clippingRatioDidChange:animated];
         }];
     }else {
+        self.lineView.frame = imageFrame;
         self.imageView.frame = imageFrame;
         self.gridLayer.frame = self.imageView.bounds;
         [self clippingRatioDidChange:animated];
@@ -215,9 +214,10 @@
     self.leftBottomView.center = [self convertPoint:CGPointMake(self.clippingRect.origin.x, self.clippingRect.origin.y+self.clippingRect.size.height) fromView:self.imageView];
     self.rightTopView.center = [self convertPoint:CGPointMake(self.clippingRect.origin.x+self.clippingRect.size.width, self.clippingRect.origin.y) fromView:self.imageView];
     self.rightBottomView.center = [self convertPoint:CGPointMake(self.clippingRect.origin.x+self.clippingRect.size.width, self.clippingRect.origin.y+self.clippingRect.size.height) fromView:self.imageView];
-    self.gridLayer.clippingRect = self.clippingRect;
-    [self.gridLayer setNeedsDisplay];
-    
+//    self.gridLayer.clippingRect = self.clippingRect;
+//    [self.gridLayer setNeedsDisplay];
+    self.lineView.clippingRect = self.clippingRect;
+    [self.lineView setNeedsDisplay];
     
     
     if (self.isSelectRatio) {
@@ -571,6 +571,15 @@
 //        _gridLayer.alpha = 0.f;
     }
     return _gridLayer;
+}
+
+- (CATailorLineView *)lineView
+{
+    if (!_lineView) {
+        _lineView = [[CATailorLineView alloc]init];
+        _lineView.backgroundColor = [UIColor clearColor];
+    }
+    return _lineView;
 }
 
 - (CAShapeLayer *)tempLayer

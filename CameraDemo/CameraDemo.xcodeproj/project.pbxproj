@@ -30,6 +30,7 @@
 		E008A1DF22978FB500A1064C /* CATailorView.m in Sources */ = {isa = PBXBuildFile; fileRef = E008A1DE22978FB500A1064C /* CATailorView.m */; };
 		E008A1E222978FCE00A1064C /* CATailorGridLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = E008A1E122978FCE00A1064C /* CATailorGridLayer.m */; };
 		E008A1E522978FEE00A1064C /* CATailorCornerView.m in Sources */ = {isa = PBXBuildFile; fileRef = E008A1E422978FEE00A1064C /* CATailorCornerView.m */; };
+		E008A1EB2297FE1300A1064C /* CATailorLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = E008A1EA2297FE1300A1064C /* CATailorLineView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -79,6 +80,8 @@
 		E008A1E122978FCE00A1064C /* CATailorGridLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CATailorGridLayer.m; sourceTree = "<group>"; };
 		E008A1E322978FEE00A1064C /* CATailorCornerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CATailorCornerView.h; sourceTree = "<group>"; };
 		E008A1E422978FEE00A1064C /* CATailorCornerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CATailorCornerView.m; sourceTree = "<group>"; };
+		E008A1E92297FE1300A1064C /* CATailorLineView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CATailorLineView.h; sourceTree = "<group>"; };
+		E008A1EA2297FE1300A1064C /* CATailorLineView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CATailorLineView.m; sourceTree = "<group>"; };
 		FFA151F35793856F07090E1F /* libPods-CameraDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CameraDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -206,6 +209,8 @@
 				E008A1E122978FCE00A1064C /* CATailorGridLayer.m */,
 				E008A1E322978FEE00A1064C /* CATailorCornerView.h */,
 				E008A1E422978FEE00A1064C /* CATailorCornerView.m */,
+				E008A1E92297FE1300A1064C /* CATailorLineView.h */,
+				E008A1EA2297FE1300A1064C /* CATailorLineView.m */,
 			);
 			path = Crop;
 			sourceTree = "<group>";
@@ -335,6 +340,7 @@
 				E008A1D222963AB700A1064C /* UIColor+SWCustomMethod.m in Sources */,
 				E008A1B72294E92100A1064C /* JPImageresizerView.m in Sources */,
 				E008A1B82294E92100A1064C /* UIImage+JPExtension.m in Sources */,
+				E008A1EB2297FE1300A1064C /* CATailorLineView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
