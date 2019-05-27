@@ -21,6 +21,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (UIImage *)getTailorImage;
 
+- (CGRect)getTailorImageRect;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -19,16 +19,15 @@
     
     CGRect rct = self.bounds;
 
+    NSLog(@"本来:%@---",NSStringFromCGRect(rect));
     CGContextSetLineWidth(context, 0.5);
-    
-    rct = self.clippingRect;
     
     CGContextBeginPath(context);
     CGFloat dW = 0;
     for(int i = 0; i < 4; ++i){
         if ( i == 1 || i == 2 ) {
-            CGContextSetStrokeColorWithColor(context, [UIColor redColor].CGColor);
-            
+            CGContextSetStrokeColorWithColor(context, [UIColor RGBColorWithR:255 G:255 B:255 alpha:0.7].CGColor);
+
         } else {
             CGContextSetStrokeColorWithColor(context, [UIColor RGBColorWithR:255 G:255 B:255 alpha:0.7].CGColor);
         }
@@ -41,9 +40,9 @@
     dW = 0;
     for(int i = 0; i < 4; ++i){
         if ( i == 1 || i == 2 ) {
-            CGContextSetStrokeColorWithColor(context, [UIColor redColor].CGColor);
-            //            CGContextSetStrokeColorWithColor(context, [UIColor RGBColorWithR:255 G:255 B:255 alpha:0.7].CGColor);
+            CGContextSetStrokeColorWithColor(context, [UIColor RGBColorWithR:255 G:255 B:255 alpha:0.7].CGColor);
         } else {
+
             CGContextSetStrokeColorWithColor(context, [UIColor RGBColorWithR:255 G:255 B:255 alpha:0.7].CGColor);
         }
         CGContextMoveToPoint(context, rct.origin.x, rct.origin.y+dW);

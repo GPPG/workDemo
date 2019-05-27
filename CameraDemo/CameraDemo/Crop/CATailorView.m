@@ -31,7 +31,6 @@
 
 @property (assign, nonatomic) CGRect clippingRect;
 
-@property (nonatomic,assign) CGRect lastClippingRect;
 @property (nonatomic, strong) CAShapeLayer *tempLayer;
 @property (nonatomic, strong) CATailorLineView *lineView;
 
@@ -102,18 +101,19 @@
         bottomMargin = 21;
     }
     CGRect imageFrame = [self getImageFrame];
+    NSLog(@"一开始:%@",NSStringFromCGRect(imageFrame));
     if (animated) {
         self.gridLayer.frame = CGRectMake(0, 0, imageFrame.size.width, imageFrame.size.height);
         [UIView animateWithDuration:0.25 animations:^{
             self.imageView.frame = imageFrame;
-            self.lineView.frame = imageFrame;
+            self.lineView.frame = self.gridLayer.bounds;
         } completion:^(BOOL finished) {
             [self clippingRatioDidChange:animated];
         }];
     }else {
-        self.lineView.frame = imageFrame;
         self.imageView.frame = imageFrame;
         self.gridLayer.frame = self.imageView.bounds;
+        self.lineView.frame = self.gridLayer.bounds;
         [self clippingRatioDidChange:animated];
     }
 }
@@ -131,22 +131,14 @@
 }
 - (void)didRestoreClick {
     
-    [UIView animateWithDuration:0.2 animations:^{
-        //        self.gridLayer.alpha = 0;
-        //        self.leftTopView.alpha = 0;
-        //        self.leftBottomView.alpha = 0;
-        //        self.rightTopView.alpha = 0;
-        //        self.rightBottomView.alpha = 0;
+    self.imageView.image = self.originalImage;
+    CGRect imageRect = [self getImageFrame];
+    self.gridLayer.frame = CGRectMake(0, 0, imageRect.size.width, imageRect.size.height);
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        self.imageView.frame = imageRect;
     } completion:^(BOOL finished) {
-        self.imageView.image = self.originalImage;
-        CGRect imageRect = [self getImageFrame];
-        self.gridLayer.frame = CGRectMake(0, 0, imageRect.size.width, imageRect.size.height);
-        
-        [UIView animateWithDuration:0.3 animations:^{
-            self.imageView.frame = imageRect;
-        } completion:^(BOOL finished) {
-            [self clippingRatioDidChange:YES];
-        }];
+        [self clippingRatioDidChange:YES];
     }];
 }
 
@@ -169,56 +161,10 @@
 // 是否需要过渡动画
 - (void)setClippingRect:(CGRect)clippingRect animated:(BOOL)animated {
     self.clippingRect = clippingRect;
-
-//    if (animated) {
-
-        /*
-        if (self.isSelectRatio) {
-            [UIView animateWithDuration:0.1 animations:^{
-                self.clippingRect = clippingRect;
-            } completion:^(BOOL finished){
-                [self exhibitionView];
-            }];
-        }else {
-            self.clippingRect = clippingRect;
-            [self exhibitionView];
-        }
-    } else {
-        self.clippingRect = clippingRect;
-        [self exhibitionView];
-    }
-         */
-//    }
-    
-}
-
-// 显示
-- (void)exhibitionView{
-    self.isSelectRatio = NO;
-
-//    self.imageView.alpha = 1;
-//
-//    [UIView animateWithDuration:0.2 animations:^{
-//        self.leftTopView.alpha = 1;
-//        self.leftBottomView.alpha = 1;
-//        self.rightTopView.alpha = 1;
-//        self.rightBottomView.alpha = 1;
-//        self.gridLayer.alpha = 1;
-//    }];
 }
 
 // 开始绘制裁剪范围
 - (void)startClipping{
-    self.leftTopView.center = [self convertPoint:CGPointMake(self.clippingRect.origin.x, self.clippingRect.origin.y) fromView:self.imageView];
-
-    self.leftBottomView.center = [self convertPoint:CGPointMake(self.clippingRect.origin.x, self.clippingRect.origin.y+self.clippingRect.size.height) fromView:self.imageView];
-    self.rightTopView.center = [self convertPoint:CGPointMake(self.clippingRect.origin.x+self.clippingRect.size.width, self.clippingRect.origin.y) fromView:self.imageView];
-    self.rightBottomView.center = [self convertPoint:CGPointMake(self.clippingRect.origin.x+self.clippingRect.size.width, self.clippingRect.origin.y+self.clippingRect.size.height) fromView:self.imageView];
-//    self.gridLayer.clippingRect = self.clippingRect;
-//    [self.gridLayer setNeedsDisplay];
-    self.lineView.clippingRect = self.clippingRect;
-    [self.lineView setNeedsDisplay];
-    
     
     if (self.isSelectRatio) {
         
@@ -234,18 +180,37 @@
         pathAnimation.fillMode = kCAFillModeForwards;
         pathAnimation.delegate = self;
         [self.tempLayer addAnimation:pathAnimation forKey:nil];
-        self.isSelectRatio = NO;
+        
+        [UIView animateWithDuration:0.3 animations:^{
+            self.lineView.frame = self.clippingRect;
+            
+            self.leftTopView.center = [self convertPoint:CGPointMake(self.clippingRect.origin.x, self.clippingRect.origin.y) fromView:self.imageView];
+            
+            self.leftBottomView.center = [self convertPoint:CGPointMake(self.clippingRect.origin.x, self.clippingRect.origin.y+self.clippingRect.size.height) fromView:self.imageView];
+            self.rightTopView.center = [self convertPoint:CGPointMake(self.clippingRect.origin.x+self.clippingRect.size.width, self.clippingRect.origin.y) fromView:self.imageView];
+            self.rightBottomView.center = [self convertPoint:CGPointMake(self.clippingRect.origin.x+self.clippingRect.size.width, self.clippingRect.origin.y+self.clippingRect.size.height) fromView:self.imageView];
+        }completion:^(BOOL finished) {
+            self.isSelectRatio = NO;
+        }];
         
     }else{
         
+        self.leftTopView.center = [self convertPoint:CGPointMake(self.clippingRect.origin.x, self.clippingRect.origin.y) fromView:self.imageView];
+        
+        self.leftBottomView.center = [self convertPoint:CGPointMake(self.clippingRect.origin.x, self.clippingRect.origin.y+self.clippingRect.size.height) fromView:self.imageView];
+        self.rightTopView.center = [self convertPoint:CGPointMake(self.clippingRect.origin.x+self.clippingRect.size.width, self.clippingRect.origin.y) fromView:self.imageView];
+        self.rightBottomView.center = [self convertPoint:CGPointMake(self.clippingRect.origin.x+self.clippingRect.size.width, self.clippingRect.origin.y+self.clippingRect.size.height) fromView:self.imageView];
+
         UIBezierPath *rectPath = [UIBezierPath bezierPathWithRect:self.gridLayer.bounds];
         UIBezierPath *path = [UIBezierPath bezierPathWithRect:self.clippingRect];
         [rectPath appendPath:path];
         self.tempLayer.path = [rectPath CGPath];
+
+        self.lineView.frame = self.clippingRect;
+        self.lineView.clippingRect = self.clippingRect;
+        [self.lineView setNeedsDisplay];
+
     }
-    
-    self.lastClippingRect = self.clippingRect;
-   
 }
 
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag {
@@ -255,9 +220,7 @@
     [rectPath appendPath:path];
     self.tempLayer.path = rectPath.CGPath;
     [self.tempLayer removeAllAnimations];
-    
 }
-
 
 
 - (CGRect)getImageFrame{
@@ -352,6 +315,11 @@
     
     return [self clipImage];
 }
+
+- (CGRect)getTailorImageRect{
+    return self.clippingRect;
+}
+
 
 #pragma mark - set
 - (void)setOriginalImage:(UIImage *)originalImage{
@@ -552,7 +520,6 @@
 - (UIImageView *)imageView {
     if (!_imageView) {
         _imageView = [[UIImageView alloc] init];
-//        _imageView.alpha = 0;
         _imageView.contentMode = UIViewContentModeScaleAspectFill;
         _imageView.clipsToBounds = YES;
         [_imageView addSubview:self.gridLayer];
@@ -567,8 +534,6 @@
     if (!_gridLayer) {
         _gridLayer = [[CATailorGridLayer alloc] init];
         _gridLayer.backgroundColor  = [[UIColor blackColor] colorWithAlphaComponent:.5];;
-//        _gridLayer.gridColor = [UIColor RGBColorWithR:149 G:109 B:255 alpha:1.0];
-//        _gridLayer.alpha = 0.f;
     }
     return _gridLayer;
 }
@@ -621,7 +586,6 @@
     view.backgroundColor = [UIColor clearColor];
     view.bgColor = [UIColor whiteColor];
     view.tag = tag;
-//    view.alpha = 0;
     
     UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panCircleView:)];
     [view addGestureRecognizer:panGesture];

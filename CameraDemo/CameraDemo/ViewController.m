@@ -35,6 +35,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // exposure 曝光
+    // contrast 对比
+    // saturation 饱和度
+    // sharpen  锐化
+    // tone 色调
+    // highlights 高光
+    // shadows 阴影
+
+    
     CGRect rect = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 150);
     
     self.tailorView = [[CATailorView alloc]initWithFrame:rect];

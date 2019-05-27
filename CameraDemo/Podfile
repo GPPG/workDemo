@@ -9,5 +9,6 @@ target 'CameraDemo' do
 
   pod 'Masonry'
 
+  pod 'GPUImage'
 
 end

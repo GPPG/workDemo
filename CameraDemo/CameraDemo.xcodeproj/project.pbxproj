@@ -31,6 +31,8 @@
 		E008A1E222978FCE00A1064C /* CATailorGridLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = E008A1E122978FCE00A1064C /* CATailorGridLayer.m */; };
 		E008A1E522978FEE00A1064C /* CATailorCornerView.m in Sources */ = {isa = PBXBuildFile; fileRef = E008A1E422978FEE00A1064C /* CATailorCornerView.m */; };
 		E008A1EB2297FE1300A1064C /* CATailorLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = E008A1EA2297FE1300A1064C /* CATailorLineView.m */; };
+		E008A213229BBDA600A1064C /* CAGPUImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E008A212229BBDA600A1064C /* CAGPUImageViewController.m */; };
+		E008A215229BBDBA00A1064C /* CAGPUImageViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E008A214229BBDBA00A1064C /* CAGPUImageViewController.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -82,6 +84,9 @@
 		E008A1E422978FEE00A1064C /* CATailorCornerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CATailorCornerView.m; sourceTree = "<group>"; };
 		E008A1E92297FE1300A1064C /* CATailorLineView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CATailorLineView.h; sourceTree = "<group>"; };
 		E008A1EA2297FE1300A1064C /* CATailorLineView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CATailorLineView.m; sourceTree = "<group>"; };
+		E008A211229BBDA600A1064C /* CAGPUImageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CAGPUImageViewController.h; sourceTree = "<group>"; };
+		E008A212229BBDA600A1064C /* CAGPUImageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CAGPUImageViewController.m; sourceTree = "<group>"; };
+		E008A214229BBDBA00A1064C /* CAGPUImageViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CAGPUImageViewController.storyboard; sourceTree = "<group>"; };
 		FFA151F35793856F07090E1F /* libPods-CameraDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CameraDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -126,6 +131,7 @@
 		E008A0D32294E8BA00A1064C /* CameraDemo */ = {
 			isa = PBXGroup;
 			children = (
+				E008A210229BBD8B00A1064C /* GPUImage */,
 				E008A1DC22978EC400A1064C /* Crop */,
 				E008A1C32296351D00A1064C /* CropTest */,
 				E008A0EA2294E8C100A1064C /* Lib */,
@@ -215,6 +221,16 @@
 			path = Crop;
 			sourceTree = "<group>";
 		};
+		E008A210229BBD8B00A1064C /* GPUImage */ = {
+			isa = PBXGroup;
+			children = (
+				E008A211229BBDA600A1064C /* CAGPUImageViewController.h */,
+				E008A212229BBDA600A1064C /* CAGPUImageViewController.m */,
+				E008A214229BBDBA00A1064C /* CAGPUImageViewController.storyboard */,
+			);
+			path = GPUImage;
+			sourceTree = "<group>";
+		};
 		EC8A4684820FEADF6CBD7CC6 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -235,6 +251,7 @@
 				E008A0CD2294E8BA00A1064C /* Sources */,
 				E008A0CE2294E8BA00A1064C /* Frameworks */,
 				E008A0CF2294E8BA00A1064C /* Resources */,
+				4EA3FA93171E69CE35CFA794 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -283,6 +300,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E008A215229BBDBA00A1064C /* CAGPUImageViewController.storyboard in Resources */,
 				E008A0E12294E8BB00A1064C /* LaunchScreen.storyboard in Resources */,
 				E008A0DE2294E8BB00A1064C /* Assets.xcassets in Resources */,
 				E008A0DC2294E8BA00A1064C /* Main.storyboard in Resources */,
@@ -314,6 +332,36 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		4EA3FA93171E69CE35CFA794 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CameraDemo/Pods-CameraDemo-resources.sh",
+				"${PODS_ROOT}/GPUImage/framework/Resources/lookup.png",
+				"${PODS_ROOT}/GPUImage/framework/Resources/lookup_amatorka.png",
+				"${PODS_ROOT}/GPUImage/framework/Resources/lookup_miss_etikate.png",
+				"${PODS_ROOT}/GPUImage/framework/Resources/lookup_soft_elegance_1.png",
+				"${PODS_ROOT}/GPUImage/framework/Resources/lookup_soft_elegance_2.png",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/lookup.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/lookup_amatorka.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/lookup_miss_etikate.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/lookup_soft_elegance_1.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/lookup_soft_elegance_2.png",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CameraDemo/Pods-CameraDemo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -324,6 +372,7 @@
 				E008A1D822963C8F00A1064C /* CACropConfigureManger.m in Sources */,
 				E008A0D92294E8BA00A1064C /* ViewController.m in Sources */,
 				E008A1E222978FCE00A1064C /* CATailorGridLayer.m in Sources */,
+				E008A213229BBDA600A1064C /* CAGPUImageViewController.m in Sources */,
 				E008A1BB2294E92100A1064C /* JPImageresizerConfigure.m in Sources */,
 				E008A1DF22978FB500A1064C /* CATailorView.m in Sources */,
 				E008A1CF229635F900A1064C /* CACropView.m in Sources */,
