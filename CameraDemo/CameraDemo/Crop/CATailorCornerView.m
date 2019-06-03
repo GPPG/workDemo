@@ -16,21 +16,28 @@
     UIBezierPath *bezier = [UIBezierPath bezierPath];
     bezier.lineWidth = 2.5f;
     bezier.lineCapStyle = kCGLineCapButt;
+    CGFloat margin = bezier.lineWidth / 2.f;
     if (self.tag == 0) {
-        [bezier addArcWithCenter:CGPointMake(self.hx_w / 2, self.hx_h / 2) radius:6 startAngle:0 endAngle:M_PI * 2 clockwise:YES];
-        
+        [bezier moveToPoint:CGPointMake(self.hx_w / 2 - margin, self.hx_h)];
+        [bezier addLineToPoint:CGPointMake(self.hx_w / 2 - margin, self.hx_h / 2 - margin)];
+        [bezier addLineToPoint:CGPointMake(self.hx_w, self.hx_h / 2 - margin)];
     }else if (self.tag == 1) {
-        [bezier addArcWithCenter:CGPointMake(self.hx_w / 2, self.hx_h / 2) radius:6 startAngle:0 endAngle:M_PI * 2 clockwise:YES];
+        [bezier moveToPoint:CGPointMake(self.hx_w / 2 - margin, 0)];
+        [bezier addLineToPoint:CGPointMake(self.hx_w / 2 - margin, self.hx_h / 2 + margin)];
+        [bezier addLineToPoint:CGPointMake(self.hx_w, self.hx_h / 2 + margin)];
     }else if (self.tag == 2) {
-        [bezier addArcWithCenter:CGPointMake(self.hx_w / 2, self.hx_h / 2) radius:6 startAngle:0 endAngle:M_PI * 2 clockwise:YES];
+        [bezier moveToPoint:CGPointMake(0, self.hx_h / 2 - margin)];
+        [bezier addLineToPoint:CGPointMake(self.hx_w / 2 + margin, self.hx_h / 2 - margin)];
+        [bezier addLineToPoint:CGPointMake(self.hx_w / 2 + margin, self.hx_h)];
     }else {
-        [bezier addArcWithCenter:CGPointMake(self.hx_w / 2, self.hx_h / 2) radius:6 startAngle:0 endAngle:M_PI * 2 clockwise:YES];
+        [bezier moveToPoint:CGPointMake(0, self.hx_h / 2 + margin)];
+        [bezier addLineToPoint:CGPointMake(self.hx_w / 2 + margin, self.hx_h / 2 + margin)];
+        [bezier addLineToPoint:CGPointMake(self.hx_w / 2 + margin, 0)];
     }
     
-    [[UIColor RGBColorWithR:149 G:109 B:255 alpha:1.0] set];
-    [[UIColor RGBColorWithR:149 G:109 B:255 alpha:1.0] setFill];
+    [[UIColor whiteColor] set];
     [bezier stroke];
-    [bezier fill];//此方法为填充圆的方法
+    
 }
 
 @end

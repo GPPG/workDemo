@@ -39,8 +39,7 @@
                                         <rect key="frame" x="128.5" y="0.0" width="53" height="50"/>
                                         <state key="normal" title="3:2"/>
                                         <connections>
-                                            <action selector="oneAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="SvY-xP-koL"/>
-                                            <action selector="threeAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="K9n-N6-FpQ"/>
+                                            <action selector="threeAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="CeE-gt-Lwc"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8yQ-h0-iHY">

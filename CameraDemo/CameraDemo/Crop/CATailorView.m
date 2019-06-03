@@ -175,13 +175,13 @@
         [rectPath appendPath:path];
         
         pathAnimation.toValue = (id)rectPath.CGPath;
-        pathAnimation.duration = 0.3;
+        pathAnimation.duration = 0.25;
         pathAnimation.removedOnCompletion = NO;
         pathAnimation.fillMode = kCAFillModeForwards;
         pathAnimation.delegate = self;
         [self.tempLayer addAnimation:pathAnimation forKey:nil];
         
-        [UIView animateWithDuration:0.3 animations:^{
+        [UIView animateWithDuration:0.25 animations:^{
             self.lineView.frame = self.clippingRect;
             
             self.leftTopView.center = [self convertPoint:CGPointMake(self.clippingRect.origin.x, self.clippingRect.origin.y) fromView:self.imageView];
@@ -304,6 +304,8 @@
     }
     
     self.isSelectRatio = YES;
+    
+    NSLog(@"比例:%f---之后:%f",self.ratio,clippingRatio);
 
     if (self.ratio != clippingRatio) {
         self.ratio = clippingRatio;
