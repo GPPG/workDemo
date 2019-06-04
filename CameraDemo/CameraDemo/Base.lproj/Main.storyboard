@@ -94,18 +94,39 @@
                                     <action selector="save:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hbf-WT-Oyt"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pnc-M7-QL6">
+                                <rect key="frame" x="39" y="775" width="31" height="30"/>
+                                <state key="normal" title="旋转"/>
+                                <connections>
+                                    <action selector="rotaAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="U9t-LL-fcD"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NPg-l1-8nU">
+                                <rect key="frame" x="91" y="775" width="62" height="30"/>
+                                <state key="normal" title="垂直翻转"/>
+                                <connections>
+                                    <action selector="verAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Mq3-1E-Ufr"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="pnc-M7-QL6" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="731" id="8dQ-Ln-27J"/>
+                            <constraint firstItem="pnc-M7-QL6" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="39" id="APk-pp-YRc"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="ylg-QF-XBZ" secondAttribute="bottom" id="BXu-3T-PCc"/>
                             <constraint firstItem="DHr-Nu-Gya" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="CuN-jR-uWj"/>
                             <constraint firstItem="ylg-QF-XBZ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="NIh-hi-yP3"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ylg-QF-XBZ" secondAttribute="trailing" id="Ve5-YE-Yzh"/>
+                            <constraint firstItem="NPg-l1-8nU" firstAttribute="baseline" secondItem="pnc-M7-QL6" secondAttribute="baseline" id="bBp-bL-YnQ"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="DHr-Nu-Gya" secondAttribute="bottom" constant="20" id="fU2-wQ-Lcd"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="DHr-Nu-Gya" secondAttribute="trailing" constant="20" id="gii-mm-MyN"/>
+                            <constraint firstItem="NPg-l1-8nU" firstAttribute="leading" secondItem="pnc-M7-QL6" secondAttribute="trailing" constant="21" id="uMx-UO-HGr"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="rotaAction" destination="pnc-M7-QL6" id="5YY-jg-qsS"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

@@ -33,6 +33,7 @@
 		E008A1EB2297FE1300A1064C /* CATailorLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = E008A1EA2297FE1300A1064C /* CATailorLineView.m */; };
 		E008A213229BBDA600A1064C /* CAGPUImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E008A212229BBDA600A1064C /* CAGPUImageViewController.m */; };
 		E008A215229BBDBA00A1064C /* CAGPUImageViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E008A214229BBDBA00A1064C /* CAGPUImageViewController.storyboard */; };
+		E0CB4EED22A502130049965F /* UIImage+CARotate.m in Sources */ = {isa = PBXBuildFile; fileRef = E0CB4EEC22A502130049965F /* UIImage+CARotate.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -87,6 +88,8 @@
 		E008A211229BBDA600A1064C /* CAGPUImageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CAGPUImageViewController.h; sourceTree = "<group>"; };
 		E008A212229BBDA600A1064C /* CAGPUImageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CAGPUImageViewController.m; sourceTree = "<group>"; };
 		E008A214229BBDBA00A1064C /* CAGPUImageViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CAGPUImageViewController.storyboard; sourceTree = "<group>"; };
+		E0CB4EEB22A502130049965F /* UIImage+CARotate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+CARotate.h"; sourceTree = "<group>"; };
+		E0CB4EEC22A502130049965F /* UIImage+CARotate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+CARotate.m"; sourceTree = "<group>"; };
 		FFA151F35793856F07090E1F /* libPods-CameraDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CameraDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -188,10 +191,6 @@
 		E008A1C32296351D00A1064C /* CropTest */ = {
 			isa = PBXGroup;
 			children = (
-				E008A1D422963B7400A1064C /* UIView+HXExtension.h */,
-				E008A1D322963B7400A1064C /* UIView+HXExtension.m */,
-				E008A1D022963AB700A1064C /* UIColor+SWCustomMethod.h */,
-				E008A1D122963AB700A1064C /* UIColor+SWCustomMethod.m */,
 				E008A1D622963C8F00A1064C /* CACropConfigureManger.h */,
 				E008A1D722963C8F00A1064C /* CACropConfigureManger.m */,
 				E008A1CD229635F900A1064C /* CACropView.h */,
@@ -217,6 +216,12 @@
 				E008A1E422978FEE00A1064C /* CATailorCornerView.m */,
 				E008A1E92297FE1300A1064C /* CATailorLineView.h */,
 				E008A1EA2297FE1300A1064C /* CATailorLineView.m */,
+				E008A1D022963AB700A1064C /* UIColor+SWCustomMethod.h */,
+				E008A1D122963AB700A1064C /* UIColor+SWCustomMethod.m */,
+				E008A1D422963B7400A1064C /* UIView+HXExtension.h */,
+				E008A1D322963B7400A1064C /* UIView+HXExtension.m */,
+				E0CB4EEB22A502130049965F /* UIImage+CARotate.h */,
+				E0CB4EEC22A502130049965F /* UIImage+CARotate.m */,
 			);
 			path = Crop;
 			sourceTree = "<group>";
@@ -371,6 +376,7 @@
 			files = (
 				E008A1D822963C8F00A1064C /* CACropConfigureManger.m in Sources */,
 				E008A0D92294E8BA00A1064C /* ViewController.m in Sources */,
+				E0CB4EED22A502130049965F /* UIImage+CARotate.m in Sources */,
 				E008A1E222978FCE00A1064C /* CATailorGridLayer.m in Sources */,
 				E008A213229BBDA600A1064C /* CAGPUImageViewController.m in Sources */,
 				E008A1BB2294E92100A1064C /* JPImageresizerConfigure.m in Sources */,

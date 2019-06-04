@@ -18,6 +18,7 @@
 
 @property (nonatomic, strong) CACropView *cropView;
 @property (nonatomic, strong) CATailorView *tailorView;
+- (IBAction)verAction:(id)sender;
 
 - (IBAction)freeAction:(id)sender;
 - (IBAction)oneAction:(id)sender;
@@ -25,6 +26,8 @@
 - (IBAction)fourAction:(id)sender;
 - (IBAction)sixteenAction:(id)sender;
 - (IBAction)nineAction:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *rotaAction;
+- (IBAction)rotaAction:(id)sender;
 
 - (IBAction)save:(id)sender;
 
@@ -47,7 +50,7 @@
     CGRect rect = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 150);
     
     self.tailorView = [[CATailorView alloc]initWithFrame:rect];
-    self.tailorView.originalImage = [UIImage imageNamed:@"Girl"];
+    self.tailorView.originalImage = [UIImage imageNamed:@"Lotus"];
     [self.view addSubview:self.tailorView];
 }
 
@@ -55,6 +58,11 @@
 
 
 // free
+- (IBAction)verAction:(id)sender {
+    
+    [self.tailorView verticalFlipAction];
+}
+
 - (IBAction)freeAction:(id)sender {
     
     [self.tailorView resizeWHScale:0.0 height:0.0];
@@ -86,6 +94,11 @@
 
     [self.tailorView resizeWHScale:9.0 height:16.0];
 
+}
+
+- (IBAction)rotaAction:(id)sender {
+    
+    [self.tailorView rotateClick];
 }
 
 - (IBAction)save:(id)sender {

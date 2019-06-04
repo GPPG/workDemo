@@ -12,8 +12,8 @@
 #import "CATailorCornerView.h"
 #import "UIColor+SWCustomMethod.h"
 #import "UIView+HXExtension.h"
-#import <Masonry.h>
 #import "CATailorLineView.h"
+#import "UIImage+CARotate.h"
 
 @interface CATailorView()<CAAnimationDelegate>
 
@@ -85,13 +85,8 @@
 
 - (void)layout{
     
-    [self.bgImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.bottom.mas_equalTo(0);
-    }];
-    
-    [self.maskView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.bottom.mas_equalTo(0);
-    }];
+    self.bgImageView.frame = self.bounds;
+    self.maskView.frame = self.bounds;
 }
 
 - (void)changeSubviewFrame:(BOOL)animated {
@@ -123,7 +118,8 @@
 - (void)switchClippingScale{
     
     if (self.ratio == 0) {
-        [self didRestoreClick];
+        [self clippingRatioDidChange:YES];
+//        [self didRestoreClick];
         
     }else{
         [self clippingRatioDidChange:YES];
@@ -196,7 +192,6 @@
     }else{
         
         self.leftTopView.center = [self convertPoint:CGPointMake(self.clippingRect.origin.x, self.clippingRect.origin.y) fromView:self.imageView];
-        
         self.leftBottomView.center = [self convertPoint:CGPointMake(self.clippingRect.origin.x, self.clippingRect.origin.y+self.clippingRect.size.height) fromView:self.imageView];
         self.rightTopView.center = [self convertPoint:CGPointMake(self.clippingRect.origin.x+self.clippingRect.size.width, self.clippingRect.origin.y) fromView:self.imageView];
         self.rightBottomView.center = [self convertPoint:CGPointMake(self.clippingRect.origin.x+self.clippingRect.size.width, self.clippingRect.origin.y+self.clippingRect.size.height) fromView:self.imageView];
@@ -290,9 +285,93 @@
     
     return img;
 }
-
+// 获取垂直翻转后的图片
+- (UIImage *)getVerticalFlipImage{
+    
+    return [self.imageView.image hx_rotationImage:UIImageOrientationUpMirrored];
+}
 
 #pragma mark - public
+- (void)rotateClick{
+    
+    [UIView animateWithDuration:0.2 animations:^{
+        self.gridLayer.alpha = 0;
+        self.leftTopView.alpha = 0;
+        self.leftBottomView.alpha = 0;
+        self.rightTopView.alpha = 0;
+        self.rightBottomView.alpha = 0;
+        self.lineView.alpha = 0;
+    
+    } completion:^(BOOL finished) {
+        
+        UIImage *image = [self.imageView.image hx_rotationImage:UIImageOrientationLeft];
+
+        CGRect imageRect = [self getImageFrame];
+        self.gridLayer.frame = CGRectMake(0, 0, imageRect.size.width, imageRect.size.height);
+        
+        [UIView animateWithDuration:0.2 animations:^{
+            self.imageView.transform = CGAffineTransformMakeRotation(-M_PI_2);
+            self.imageView.frame = imageRect;
+        } completion:^(BOOL finished) {
+            self.imageView.transform = CGAffineTransformIdentity;
+            self.imageView.image = image;
+            self.imageView.frame = imageRect;
+            [self clippingRatioDidChange:YES];
+            
+            self.gridLayer.alpha = 1;
+            self.leftTopView.alpha = 1;
+            self.leftBottomView.alpha = 1;
+            self.rightTopView.alpha = 1;
+            self.rightBottomView.alpha = 1;
+            self.lineView.alpha = 1;
+        }];
+    }];
+}
+
+- (void)verticalFlipAction{
+    
+    CATransform3D transform = self.imageView.layer.transform;
+
+    transform = CATransform3DRotate(transform, M_PI, 0, 1, 0);
+    
+    __weak typeof(self) wSelf = self;
+    void (^animateBlock)(CATransform3D aTransform) = ^(CATransform3D aTransform){
+        __strong typeof(wSelf) sSelf = wSelf;
+        if (!sSelf) return;
+        sSelf.imageView.layer.transform = aTransform;
+        
+    };
+    
+    self.imageView.layer.zPosition = -400;
+    transform.m34 = 1.0 / 1500.0;
+    
+    [UIView animateWithDuration:0.45 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        self.maskView.hidden = YES;
+        self.gridLayer.alpha = 0;
+        self.lineView.alpha = 0;
+        self.leftTopView.hidden = YES;
+        self.leftBottomView.hidden = YES;
+        self.rightTopView.hidden = YES;
+        self.rightBottomView.hidden = YES;
+        
+        animateBlock(transform);
+    } completion:^(BOOL finished) {
+        self.imageView.layer.zPosition = 0;
+        self.maskView.hidden = NO;
+        self.leftTopView.hidden = NO;
+        self.leftBottomView.hidden = NO;
+        self.rightTopView.hidden = NO;
+        self.rightBottomView.hidden = NO;
+        self.lineView.alpha = 1;
+        self.gridLayer.alpha = 1;
+        
+        self.imageView.image = [self getVerticalFlipImage];
+        self.imageView.layer.transform = CATransform3DIdentity;
+        [self clippingRatioDidChange:YES];
+
+    }];
+}
+
 - (void)resizeWHScale:(CGFloat)width height:(CGFloat)height{
     
     CGFloat clippingRatio;
@@ -305,11 +384,13 @@
     
     self.isSelectRatio = YES;
     
-    NSLog(@"比例:%f---之后:%f",self.ratio,clippingRatio);
-
     if (self.ratio != clippingRatio) {
         self.ratio = clippingRatio;
         [self switchClippingScale];
+    }else{
+        if (self.ratio == 0) {
+            [self clippingRatioDidChange:YES];
+        }
     }
 }
 

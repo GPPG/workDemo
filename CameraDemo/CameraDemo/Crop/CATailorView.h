@@ -19,6 +19,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)resizeWHScale:(CGFloat)width height:(CGFloat)height;
 
+- (void)rotateClick;
+
+- (void)verticalFlipAction;
+
 - (UIImage *)getTailorImage;
 
 - (CGRect)getTailorImageRect;
