@@ -60,6 +60,9 @@
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="iconIMageView" destination="nsu-wB-9ol" id="U9G-SN-FhX"/>
+            </connections>
             <point key="canvasLocation" x="52.898550724637687" y="-72.321428571428569"/>
         </view>
     </objects>

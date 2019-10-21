@@ -10,12 +10,35 @@ import UIKit
 
 class InfoViewController: UIViewController {
 
+    @IBOutlet weak var iconImageView: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+    }
+    
+//    
+//    var iconImage: UIImage{
+//        
+//        
+//        didSet{
+//            
+//            
+//        }
+//        
+//        
+//    }
+    
+    
+
+    @IBAction func tapAction(_ sender: Any) {
+        
+        
+        
+        
+        
+        
         
     }
     
-
-
 }

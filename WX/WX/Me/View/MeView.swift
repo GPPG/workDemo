@@ -10,6 +10,7 @@ import UIKit
 
 class MeView: UIView,Nibloadable {
 
+    @IBOutlet weak var iconIMageView: UIImageView!
     
     
     
